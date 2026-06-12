@@ -1,0 +1,20 @@
+# HTTP e API
+requests==2.32.3
+
+# Banco de dados
+sqlalchemy==2.0.36
+psycopg2-binary==2.9.10
+
+# Configuração e validação
+pydantic==2.10.3
+pydantic-settings==2.7.0
+python-dotenv==1.0.1
+
+# Transformação de dados
+pandas==2.2.3
+
+# Qualidade e testes
+pytest==8.3.4
+
+# Dashboard (usaremos nas etapas finais)
+streamlit==1.41.1

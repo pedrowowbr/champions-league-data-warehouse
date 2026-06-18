@@ -4,10 +4,11 @@ from pydantic import Field
 
 class Settings(BaseSettings):
     """
-    Configurações centralizadas do projeto.
-    Pydantic lê automaticamente do .env e valida os tipos.
-    Se uma variável obrigatória estiver faltando, o erro aparece
-    na inicialização — não no meio da execução.
+    Configuracoes centralizadas do projeto.
+    O Pydantic carrega automaticamente os valores do arquivo .env
+    e valida seus tipos durante a inicializacao da aplicacao.
+    Caso alguma variavel obrigatoria esteja ausente,
+    o erro sera exibido na inicializacao e nao durante a execucao.
     """
 
     model_config = SettingsConfigDict(
@@ -17,7 +18,7 @@ class Settings(BaseSettings):
     )
 
     # API Football
-    api_football_key: str = Field(..., description="Chave da API Football")
+    api_football_key: str = Field(..., description="API Football key")
     api_football_base_url: str = Field(
         default="https://v3.football.api-sports.io"
     )
@@ -31,7 +32,9 @@ class Settings(BaseSettings):
 
     @property
     def database_url(self) -> str:
-        """Monta a URL de conexão de forma segura, sem expor senha em logs."""
+        """   Monta a URL de conexao com o banco de dados.
+        Centralizar esta logica evita duplicacao de codigo
+        e facilita futuras manutencoes."""
         return (
             f"postgresql+psycopg2://{self.postgres_user}:"
             f"{self.postgres_password}@{self.postgres_host}:"
@@ -39,5 +42,5 @@ class Settings(BaseSettings):
         )
 
 
-# Instância única compartilhada por todo o projeto (Singleton pattern)
+# Instancia unica compartilhada por todo o projeto. Segue o padrao Singleton para evitar recriacao desnecessaria.
 settings = Settings()

@@ -2,6 +2,7 @@ import logging
 import sys
 
 from src.database.connection import test_connection
+from src.database.schema import criar_schemas
 from src.extract.api_client import test_api_connection
 from src.config.settings import settings
 
@@ -23,6 +24,9 @@ def main() -> None:
         logger.error(
             "Falha na conexao com o banco. Verifique o Docker e o .env.")
         sys.exit(1)
+
+    # Cria tabelas se não existirem
+    criar_schemas()
 
     # Valida conexao com a API
     if not test_api_connection():

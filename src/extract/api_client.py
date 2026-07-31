@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 # ID da Champions League na API Football
 CHAMPIONS_LEAGUE_ID = 2
-SEASON = 2024
+SEASON = 2026
 
 
 class APIFootballClient:

@@ -4,6 +4,7 @@ import sys
 from src.database.connection import test_connection
 from src.database.schema import criar_schemas
 from src.extract.api_client import test_api_connection
+from src.load.bronze_loader import BronzeLoader
 from src.config.settings import settings
 
 logging.basicConfig(
@@ -36,6 +37,10 @@ def main() -> None:
 
     logger.info(
         "Fundacao OK. Banco e API funcionando. Pronto para extrair dados.")
+
+    # Executa carga Bronze
+    loader = BronzeLoader()
+    loader.carregar_tudo()
 
 
 # O main aqui serve principalmente para validar as configuracoes e conexoes antes de iniciar o processo de extracao.
